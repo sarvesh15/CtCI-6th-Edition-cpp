@@ -73,7 +73,9 @@ void removeDuplicates( Node * head ) {
 		Node * runner = curr;
 		while (runner->next != nullptr) {
 			if (runner->next->data == curr->data) {
+				Node *nodeToBeDeleted = runner->next;
 				runner->next = runner->next->next;
+				delete nodeToBeDeleted; // Free duplicate node
 			} else {
 				runner = runner->next;
 			}
@@ -99,7 +101,9 @@ void removeDuplicates1( Node * head ) {
 	node_map[head->data] = 1;
 	while( curr != nullptr ) {
 		while (curr && node_map.find(curr->data) != node_map.end()) {
+			Node *nodeToBeDeleted = curr;
 			curr = curr->next;
+			delete nodeToBeDeleted; // Free duplicate node
 		}
 		prev->next = curr;
 		prev = curr;
